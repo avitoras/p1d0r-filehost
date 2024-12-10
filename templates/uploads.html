@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <title>P1d0r mooseec uploads!</title>
+</head>
+{% include 'menu/menu.html' %}
+<body>
+    <div class="uploads_card card">
+        <h1>Все песни, залитые на мой сайт</h1>
+        <p>Количество залитых файлов: {{ amount }}</p>
+        <u1 class=files>
+            {% for file in files %}
+                <li>
+                    <a href="{{ url_for('static', filename='uploads/' + file) }}"> {{ file }} </a>
+                </li>
+            {% endfor %}
+        </u1>
+    </div>
+</body>
+</html>

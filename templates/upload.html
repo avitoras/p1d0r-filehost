@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p1d0r files</title>
+</head>
+{% include 'menu/menu.html' %}
+<body>
+    <div class="card">
+        {% if current_user.is_authenticated %}
+            <h1>Добро пожаловать в p1d0r mooseec!</h1>
+            <p>Загрузите свои песни во флаке, мп3 и тд до 35 МБ (ну пока загружайте че хотите)</p>
+            <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+                <input type="file" name="file" class="file-input">
+                <button type="submit" class="upload-button">Загрузить</button>
+            </form>
+        {% else %}
+            <h1>Доступ запрещен</h1>
+            <p>Только авторизованные пользователи могут загружать файлы.</p>
+            <a class="upload-button" href="/login">Войти</a>
+        {% endif %}
+    </div>
+</body>
+</html>

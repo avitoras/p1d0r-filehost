@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+}
+
+h1 {
+    color: #5555FF;
+    margin: 15px
+}
+
+h3 {
+    color: #1154b9;
+    margin: -5px
+}
+
+.messag {
+    color: red;
+    margin: 30px;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+.mini {
+    font-size: 4px;
+    color: #888;
+}
+
+.card {
+    text-align: center;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: fit-content;
+    width: 500px;
+}
+
+.uploads_card {
+    width: 1000px;
+    position: absolute;
+    top: 75px;
+    z-index: 1;
+}
+
+
+.upload-form {
+    margin-top: 20px;
+}
+
+.file-input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.upload-button {
+    background-color: #5555FF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.upload-button:hover {
+    background-color: #3333CC;
+}
+
+nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #caccda;
+	padding: 10px 20px;
+	border-radius: 0 0 10px 10px;
+	z-index: 6;
+}
+
+.item {
+	font-family: Arial, sans-serif;
+	color: #22395c;
+	font-size: 18px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.left_button {
+	font-family: Arial, sans-serif;
+	color: #22395c;
+	padding: 5px 10px;
+	font-size: 14px;
+	text-decoration: none;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+
+.search_button {
+    font-family: Arial, sans-serif;
+	color: #22395c;
+	font-size: 14px;
+	text-decoration: none;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+
+.button_wrapper {
+	gap: 2px;
+	width: fit-content;
+}
+
+.register-button, .login-button {
+    bottom: 10px;
+}
+
+.log_reg_butt {
+    background-color: #5555FF;
+    color: white;
+    border: none;
+    padding: 3px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.pass_box {
+    margin-top: 7px;
+}
+

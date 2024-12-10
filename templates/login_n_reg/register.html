@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+{% include 'menu/menu.html' %}
+    <div class="card">
+        <h1>Регистрация</h1>
+        <form method="POST" action="/register">
+            <input type="text" minlength="2" maxlength="20" pattern="[^ ]+" name="username" placeholder="Никнейм" required> <br>
+            <input type="password" minlength="6" class=pass_box maxlength="64" name="password" placeholder="Пароль" required> <br>
+            <button type="submit" class="log_reg_butt">Зарегистрироваться</button>
+        </form>
+        <p>Уже есть аккаунт? <a href="/login">Войдите</a>.</p>
+    </div>
+</body>
+</html>
