@@ -1,0 +1,13 @@
+*.pyc
+__pycache__/
+*/__pycache__/
+
+Dockerfile
+.dockerignore
+
+*.log
+
+.git
+.github
+
+.idea/

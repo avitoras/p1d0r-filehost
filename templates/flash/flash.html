@@ -1,0 +1,7 @@
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+               <b><a style="text-align: center;color: red;position: relative; top: -50px;">{{ message }} </a></b>
+            {% endfor %}
+        {% endif %}
+{% endwith %}

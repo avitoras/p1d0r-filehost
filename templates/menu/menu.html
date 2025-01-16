@@ -1,16 +1,9 @@
 <nav>
 	<b><a class="item" href="/">P1d0r project!</a></b>
-    <form>
-        <input type="search" name="text" class="search" placeholder="Какой файл хотите найти?">
-        <input type="submit" name="submit" class="search_button" value="Поиск">
+    <form method="GET" action="/search_results">
+        <input type="search" name="query" class="search" placeholder="Какой файл хотите найти?">
+        <input type="submit" value="Поиск">
     </form>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-               <b><a style="text-align: center;color: red">{{ message }} </a></b>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 	<div class="button_wrapper">
 	{% if current_user.is_authenticated %}
         <a class="left_button" href="/uploads">Файлы</a>
