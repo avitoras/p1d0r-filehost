@@ -1,23 +1,24 @@
 import flask
 import hashlib
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from os import path, makedirs, listdir
+from os import path, makedirs, listdir, getenv
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
 UPLOAD_FOLDER = './static/uploads'
-ALLOWED_EXTENSIONS = {'mp3', 'flac', 'wav', 'aac', 'ogg', 'm4a', 'opus'}
+ALLOWED_EXTS = {'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac', 'audio/aac', 'audio/m4a'}
 MAX_FILE_SIZE = 35 * 1024 * 1024  # 25 мегабайт
 
-# python -c "import secrets; print(secrets.token_hex(16))" for SECRET_KEY
-app.config['SECRET_KEY'] = 'nope'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SECRET_KEY'] = getenv("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = getenv("SQLALCHEMY_DATABASE_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
-
 
 db = SQLAlchemy(app)
 
@@ -99,28 +100,33 @@ def logout():
 def upload():
     if request.method == 'POST':
         if 'file' not in request.files:
-            return 'Файл не найден', 400
+            flash('Файл не найден', 'danger')
+            return redirect(url_for('upload'))
 
         file = request.files['file']
 
         if not file.filename:
-            return 'Имя файла пустое', 400
+            flash('Имя файла пустое', 'danger')
+            return redirect(url_for('upload'))
 
         if not file.filename.strip():
-            return 'Имя файла пустое', 400
+            flash('Имя файла пустое', 'danger')
+            return redirect(url_for('upload'))
 
         if file:
+            mime_type = file.mimetype
+            if mime_type not in ALLOWED_EXTS:
+                flash(f'Это не музыка. Можна тока музыко', 'danger')
+                return redirect(url_for('upload'))
+
             try:
                 filename = file.filename
                 filepath = path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(filepath)
-                flash(f'{filename} загужен!!', 'success')
-                new_song = Songs(filename=filename, username=current_user.username)
-                db.session.add(new_song)
-                db.session.commit()
+                flash(f'{filename} успешно загружен!', 'success')
                 return redirect(url_for('upload'))
-            except Exception:
-                flash('Неподдерживаемый формат либо какая-то ошибка', 'danger')
+            except Exception as e:
+                flash(f'Произошла ошибка при загрузке файла: {e}', 'danger')
                 return redirect(url_for('upload'))
 
     return render_template('upload.html', user=current_user)
@@ -131,6 +137,14 @@ def uploads():
     amount = len(files)
     return render_template('uploads.html', files=files, user=current_user, amount=amount)
 
+@app.route('/search_results')
+def search_results():
+    query = request.args.get('query')
+    files = listdir(UPLOAD_FOLDER)
+    results = []
+    if query:
+        results = [file for file in files if query.lower() in file.lower()]
+    return render_template('search_results.html', results=results, query=query, user=current_user)
 
 if __name__ == '__main__':
-    app.run(debug=True,)
+    app.run(debug=True, host='0.0.0.0')

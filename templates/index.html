@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="/static/styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p1d0r files</title>
-</head>
-{% include 'menu/menu.html' %}
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Музыкохост от авитараса{% endblock %}
+
+{% block content %}
     <div class="card">
-        <h1>Файлопомойка от авитараса</h1>
+        <h1>Музычка от авитораса</h1>
         <p>Заливайте что вашей душе угодно!</p>
     </div>
-    <footer>
-        <p>
-            Создал avitoras
-        </p>
-    </footer>
-</body>
-</html>
+{% endblock %}

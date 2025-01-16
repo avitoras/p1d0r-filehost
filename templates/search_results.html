@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <title>Результаты поиска</title>
+</head>
+{% include 'menu/menu.html' %}
+{% include 'flash/flash.html' %}
+<body>
+    <div class="uploads_card card">
+        <h2 style="color: #5555FF">Результаты поиска для "{{ query }}"</h2>
+
+        {% if results %}
+        <ul class="files">
+            {% for result in results %}
+            <li>
+                <a href="{{ url_for('static', filename='uploads/' + result) }}"> {{ result }} </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Ничего не найдено.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
